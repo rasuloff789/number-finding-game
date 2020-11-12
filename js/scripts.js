@@ -14,8 +14,7 @@ var checkNumberBtn = checkNumberForm.querySelector('.check-number-btn');
 
 var result = document.querySelector('.result');
 var openModal = document.querySelector('.openModal');
-var reloadPageBtn = document.querySelector('.reloadPageBtn');
-var reloadPage = document.querySelector('.reloadPage');
+var reloadPageBtn = document.querySelectorAll('.reloadPageBtn');
 
 var thinkNumber = 100 ; 
 var thinkNumberRandom = Math.floor(Math.random() * (thinkNumber  + 1) );
@@ -36,18 +35,24 @@ var openModalFnc = function(){
   openModal.classList.add("show");
   openModal.style.display = "block" ;
 }
-
-reloadPageBtn.addEventListener('click' , function(){
-  location.reload();
-})
-
-reloadPage.addEventListener('click' , function(){
-  location.reload();
-})
+for(var i = 0; i < reloadPageBtn.length ;i++ ){
+  reloadPageBtn[i].addEventListener('click' , function(){
+    location.reload();
+  });
+};
 
 thinkNumberForm.addEventListener('submit' , function(evt){
   evt.preventDefault();
   var thinkNumberInputValue = parseFloat( Math.round(thinkNumberInput.value.trim()) , 10);
+  
+  if(thinkNumberInput.value.trim() === ""){
+    
+    thinkNumberInput.value = "";
+    alert('Baribir tekshirishingizni bilgandim :))');
+    return;
+    
+  }
+  
   if (isNaN(thinkNumberInputValue)){
     
     thinkNumberInput.value = "";
@@ -75,7 +80,11 @@ thinkAttempForm.addEventListener('submit' , function(evt){
   evt.preventDefault();
   
   var thinkAttempInputValue = parseFloat( Math.round(thinkAttempInput.value.trim()) , 10);
-  
+  if(thinkAttempInput.value.trim() === ""){
+    thinkAttempInput.value = "";
+    alert('Baribir tekshirishingizni bilgandim :))');
+    return;
+  }
   if (isNaN(thinkAttempInputValue)){
     
     thinkAttempInput.value = "";
